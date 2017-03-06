@@ -87,8 +87,9 @@ app.post('/buttons', function(req, res) {
   var spot = Object.keys(match.actions).find(function(a) {
     return !match.actions[a];
   });
-  match.actions[spot] = user;
-  console.log("UPDATING", messageID, channelID, payload);
+  if (spot) {
+    match.actions[spot] = user;
+  }
   //slackWeb.chat.update(messageID, channelID, "WOO");
   res.status(200).send(big_json(match));
 });
